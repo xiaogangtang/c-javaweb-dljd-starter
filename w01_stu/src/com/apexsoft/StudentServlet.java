@@ -32,7 +32,7 @@ public class StudentServlet implements Servlet {
             // 获取连接
             String url = "jdbc:mysql://localhost:3306/bjpowernode";
             String user = "root";
-            String password = "621799mac";
+            String password = "621799";
             conn = DriverManager.getConnection(url, user, password);
             // 获取预编译的数据库操作对象
             String sql = "select no,name from t_student";
