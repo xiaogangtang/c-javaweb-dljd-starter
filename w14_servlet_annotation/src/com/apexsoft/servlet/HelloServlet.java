@@ -11,10 +11,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-@WebServlet(name = "hello",
+@WebServlet(
+        name = "hello",
         urlPatterns = {"/hello1", "/hello2", "/hello3"},
         //loadOnStartup = 1,
- initParams = {@WebInitParam(name="username", value="root"), @WebInitParam(name="password", value="123")})
+        initParams = {
+                @WebInitParam(name="username", value="root"),
+                @WebInitParam(name="password", value="123")
+        })
 public class HelloServlet extends HttpServlet {
 
     // 无参数构造方法

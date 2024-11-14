@@ -7,7 +7,7 @@ public class ReflectAnnotation {
 
         // 使用反射机制将类上面的注解进行解析。
         // 获取类Class对象
-        Class<?> welcomeServletClass = Class.forName("com.bjpowernode.javaweb.servlet.WelcomeServlet");
+        Class<?> welcomeServletClass = Class.forName("com.apexsoft.servlet.WelcomeServlet");
 
         // 获取这个类上面的注解对象
         // 先判断这个类上面有没有这个注解对象，如果有这个注解对象，就获取该注解对象。
