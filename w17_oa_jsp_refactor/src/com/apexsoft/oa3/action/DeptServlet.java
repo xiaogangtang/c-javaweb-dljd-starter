@@ -19,7 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 模板类
-@WebServlet({"/dept/list", "/dept/save", "/dept/edit", "/dept/detail", "/dept/delete", "/dept/modify"})
+@WebServlet({
+        "/dept/list",
+        "/dept/save",
+        "/dept/detail",
+        "/dept/delete",
+        "/dept/modify"
+})
 // 模糊匹配
 // 只要请求路径是以"/dept"开始的，都走这个Servlet。
 //@WebServlet("/dept/*")
@@ -37,9 +43,7 @@ public class DeptServlet extends HttpServlet {
             doList(request, response);
         } else if("/dept/save".equals(servletPath)){
             doSave(request, response);
-        } else if("/dept/edit".equals(servletPath)){
-            doEdit(request, response);
-        } else if("/dept/detail".equals(servletPath)){
+        }  else if("/dept/detail".equals(servletPath)){
             doDetail(request, response);
         } else if("/dept/delete".equals(servletPath)){
             doDel(request, response);
@@ -137,76 +141,14 @@ public class DeptServlet extends HttpServlet {
         }
     }
 
-    private void doEdit(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // 获取应用的根路径。
-        String contextPath = request.getContextPath();
-
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("	<head>");
-        out.print("		<meta charset='utf-8'>");
-        out.print("		<title>修改部门</title>");
-        out.print("	</head>");
-        out.print("	<body>");
-        out.print("		<h1>修改部门</h1>");
-        out.print("		<hr >");
-        out.print("		<form action='"+contextPath+"/dept/modify' method='post'>");
-
-        // 获取部门编号
-        String deptno = request.getParameter("deptno");
-        // 连接数据库，根据部门编号查询部门的信息。
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtil.getConnection();
-            String sql = "select dname, loc as location from dept where deptno = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, deptno);
-            rs = ps.executeQuery();
-            // 这个结果集中只有一条记录。
-            if(rs.next()){
-                String dname = rs.getString("dname");
-                String location = rs.getString("location"); // 参数"location"是sql语句查询结果列的列名。
-                // 输出动态网页。
-                out.print("                部门编号<input type='text' name='deptno' value='"+deptno+"' readonly /><br>");
-                out.print("                部门名称<input type='text' name='dname' value='"+dname+"'/><br>");
-                out.print("                部门位置<input type='text' name='loc' value='"+location+"'/><br>");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(conn, ps, rs);
-        }
-
-        out.print("			<input type='submit' value='修改'/><br>");
-        out.print("		</form>");
-        out.print("	</body>");
-        out.print("</html>");
-    }
-
     private void doDetail(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        out.print("<!DOCTYPE html>");
-        out.print("<html>");
-        out.print("	<head>");
-        out.print("		<meta charset='utf-8'>");
-        out.print("		<title>部门详情</title>");
-        out.print("	</head>");
-        out.print("	<body>");
-        out.print("		<h1>部门详情</h1>");
-        out.print("		<hr >");
+        Dept dept = new Dept();
 
         // 获取部门编号
-        // /oa/dept/detail?fdsafdsas=30
+        // /oa/dept/detail?dno=30
         // 虽然是提交的30，但是服务器获取的是"30"这个字符串。
-        String deptno = request.getParameter("fdsafdsas");
+        String deptno = request.getParameter("dno");
 
         // 连接数据库，根据部门编号查询部门信息。
         Connection conn = null;
@@ -219,23 +161,22 @@ public class DeptServlet extends HttpServlet {
             ps.setString(1, deptno);
             rs = ps.executeQuery();
             // 这个结果集一定只有一条记录。
-            if(rs.next()){
+            if (rs.next()){
                 String dname = rs.getString("dname");
                 String loc = rs.getString("loc");
 
-                out.print("部门编号："+deptno+" <br>");
-                out.print("部门名称："+dname+"<br>");
-                out.print("部门位置："+loc+"<br>");
+                dept.setDeptno(deptno);
+                dept.setDname(dname);
+                dept.setLoc(loc);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBUtil.close(conn, ps, rs);
         }
-
-        out.print("		<input type='button' value='后退' onclick='window.history.back()'/>");
-        out.print("	</body>");
-        out.print("</html>");
+        request.setAttribute("dept", dept);
+        String jspPage = request.getParameter("flag") + ".jsp";
+        request.getRequestDispatcher("/"+jspPage).forward(request,response);
     }
 
     private void doDel(HttpServletRequest request, HttpServletResponse response)
@@ -325,6 +266,4 @@ public class DeptServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error.html");
         }
     }
-
-
 }

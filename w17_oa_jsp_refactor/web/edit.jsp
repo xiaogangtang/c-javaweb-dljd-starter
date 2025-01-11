@@ -1,4 +1,11 @@
+<%@ page import="com.apexsoft.oa3.bean.Dept" %>
 <%@page contentType="text/html; charset=utf-8" %>
+<%@ page import="com.apexsoft.oa3.bean.Dept" %>
+
+
+<%
+	Dept dept = (Dept)request.getAttribute("dept");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,10 +15,10 @@
 	<body>
 		<h1>修改部门</h1>
 		<hr >
-		<form action="list.jsp" method="get">
-			部门编号<input type="text" name="deptno" value="20" readonly /><br>
-			部门名称<input type="text" name="dname" value="销售部"/><br>
-			部门位置<input type="text" name="loc" value="北京"/><br>
+		<form action="<%=request.getContextPath()%>/dept/modify" method="post">
+			部门编号<input type="text" name="deptno" value="<%=dept.getDeptno()%>" readonly /><br>
+			部门名称<input type="text" name="dname" value="<%=dept.getDname()%>"/><br>
+			部门位置<input type="text" name="loc" value="<%=dept.getLoc()%>"/><br>
 			<input type="submit" value="修改"/><br>
 		</form>
 	</body>
