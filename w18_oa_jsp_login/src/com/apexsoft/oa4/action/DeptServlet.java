@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,7 +58,6 @@ public class DeptServlet extends HttpServlet {
 
         // 设置响应的内容类型以及字符集。防止中文乱码问题。
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
         // 连接数据库，查询所有的部门
         Connection conn = null;

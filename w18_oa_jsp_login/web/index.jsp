@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
+<%--访问jsp时候不生成session对象--%>
+<%@page session="false" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +25,6 @@
 	<form action="<%=request.getContextPath()%>/user/login" method="post">
 		username: <input type="text" name="username" ><br>
 		password: <input type="password" name="password"><br>
-		<input type="checkbox" name="f" value="1">十天内免登录<br>
 		<input type="submit" value="login">
 	</form>
 	</body>
