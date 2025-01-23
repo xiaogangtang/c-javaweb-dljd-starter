@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
   String name = "jack";
-  // 输出name到浏览器
+  // 输出到控制台（不是浏览器）
   System.out.println("name=" + name);
-
-  // 可以直接在这个符号中使用out对象吗？
+  // 输出name到浏览器，可以直接在这个符号中使用out对象吗？
   out.write("name2 = " + name);
 
   // 输出java变量使用内置对象out

@@ -1,4 +1,4 @@
-<%@ page import="com.bjpowernode.javaweb.jsp.bean.Student" %>
+<%@ page import="com.apexsoft.jsp.bean.Student" %>
 <%@page contentType="text/html;charset=UTF-8" %>
 
 <%--

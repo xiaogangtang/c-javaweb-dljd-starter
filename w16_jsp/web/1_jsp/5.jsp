@@ -12,7 +12,7 @@
 <%@page import="java.util.*" %>--%>
 
 
-<%@page errorPage="/error.jsp" %>
+<%@page errorPage="/jsp/error.jsp" %>
 
 <%
     String name = null;
