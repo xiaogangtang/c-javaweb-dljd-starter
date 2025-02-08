@@ -1,4 +1,4 @@
-package com.apexsoft.oa7.utils;
+package com.apexsoft.oa8.utils;
 
 import java.sql.*;
 import java.util.ResourceBundle;

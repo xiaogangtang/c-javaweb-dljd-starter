@@ -1,4 +1,4 @@
-package com.apexsoft.oa7.bean;
+package com.apexsoft.oa9.bean;
 
 import java.util.Objects;
 

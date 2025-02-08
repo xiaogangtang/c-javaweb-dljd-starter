@@ -1,5 +1,5 @@
 <%@page contentType = "text/html;charset=UTF-8"%>
-<%@ page import="com.apexsoft.oa8.bean.Dept" %>
+<%@ page import="com.apexsoft.oa9.bean.Dept" %>
 
 <!DOCTYPE html>
 <html>

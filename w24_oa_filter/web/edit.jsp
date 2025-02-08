@@ -7,7 +7,7 @@
 		<title>修改部门</title>
 	</head>
 	<body>
-	<h1>${user.username}，欢迎你！！！</h></h1>
+	<h1>${user.username}，欢迎你！！！</h1>
 
 	<h1>修改部门</h1>
 		<hr >
