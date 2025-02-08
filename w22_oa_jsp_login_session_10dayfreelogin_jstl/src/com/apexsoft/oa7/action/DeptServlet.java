@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,21 +17,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet({"/dept/list", "/dept/detail", "/dept/delete", "/dept/save", "/dept/modify"})
+@WebServlet({
+        "/dept/list",
+        "/dept/detail",
+        "/dept/delete",
+        "/dept/save",
+        "/dept/modify"
+})
 public class DeptServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*// post请求乱码问题
-        request.setCharacterEncoding("UTF-8");
-        // 响应中文乱码问题
-        response.setContentType("text/html;charset=UTF-8");*/
+//        // post请求乱码问题
+//        request.setCharacterEncoding("UTF-8");
+//        // 响应中文乱码问题
+//        response.setContentType("text/html;charset=UTF-8");
 
         // 获取session（这个session是不需要新建的）
         // 只是获取当前session，获取不到这返回null
-        /*HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("username") != null){
             String servletPath = request.getServletPath();
             if("/dept/list".equals(servletPath)){
@@ -49,21 +56,21 @@ public class DeptServlet extends HttpServlet {
             //response.sendRedirect("/oa/index.jsp");
             //response.sendRedirect("/oa");
             response.sendRedirect(request.getContextPath() + "/index.jsp"); // 访问web站点的根即可，自动找到欢迎页面。
-        }*/
-
-
-        String servletPath = request.getServletPath();
-        if("/dept/list".equals(servletPath)){
-            doList(request, response);
-        }else if("/dept/detail".equals(servletPath)){
-            doDetail(request, response);
-        }else if("/dept/delete".equals(servletPath)){
-            doDel(request, response);
-        }else if("/dept/save".equals(servletPath)){
-            doSave(request, response);
-        }else if("/dept/modify".equals(servletPath)){
-            doModify(request, response);
         }
+
+
+//        String servletPath = request.getServletPath();
+//        if("/dept/list".equals(servletPath)){
+//            doList(request, response);
+//        }else if("/dept/detail".equals(servletPath)){
+//            doDetail(request, response);
+//        }else if("/dept/delete".equals(servletPath)){
+//            doDel(request, response);
+//        }else if("/dept/save".equals(servletPath)){
+//            doSave(request, response);
+//        }else if("/dept/modify".equals(servletPath)){
+//            doModify(request, response);
+//        }
 
     }
 
